@@ -74,6 +74,7 @@ button {
 button:hover { background: #00465a; }
 :focus-visible, .valinnat input:focus-visible + span { outline: 3px solid var(--sininen-tumma); outline-offset: 3px; }
 @media (max-width: 36rem) {
+  .otsikkorivi h1 { font-size: clamp(2.75rem, 10.5vw, 4.5rem); }
   .otsikkorivi { flex-direction: column; align-items: center; text-align: center; }
   .otsikkorivi img { width: min(100%, clamp(7rem, 28vw, 9rem)); }
 }

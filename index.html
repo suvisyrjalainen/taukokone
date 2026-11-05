@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Arvo lyhyt liikunta- tai rauhoittumistauko.">
   <title>Taukokone</title>
-  <link rel="stylesheet" href="tyyli.css">
-  <script src="tauot.js" defer></script>
+  <link rel="stylesheet" href="tyyli.css?v=2">
+  <script src="tauot.js?v=2" defer></script>
 </head>
 <body>
   <main>
@@ -33,6 +33,15 @@
         <label for="ika">Ikä vuosina <small>(valinnainen)</small></label>
         <input id="ika" type="number" min="1" max="120" step="1" inputmode="numeric" aria-describedby="ika-ohje">
         <p id="ika-ohje">Ikä auttaa valitsemaan sopivan tauon. Se käsitellään vain selaimessasi.</p>
+      </div>
+      <div class="kesto">
+        <label for="kesto">Tauon pituus</label>
+        <select id="kesto">
+          <option value="">Kesto arvotaan (30–90 s)</option>
+          <option value="1">1 minuutti</option>
+          <option value="5">5 minuuttia</option>
+          <option value="15">15 minuuttia</option>
+        </select>
       </div>
       <section class="kortti" aria-labelledby="tulos-otsikko">
         <h2 id="tulos-otsikko">Sinun taukosi</h2>

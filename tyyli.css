@@ -20,7 +20,7 @@ header p { max-width: 36ch; }
 h1 { margin: .65rem 0 0; font-size: clamp(2.75rem, 9vw, 5rem); line-height: 1; letter-spacing: -.06em; }
 h1 em { color: #32674f; font-style: normal; }
 fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
-legend, .ika label { font-weight: 750; }
+legend, .ika label, .kesto label { font-weight: 750; }
 legend { margin-bottom: .6rem; padding: 0; }
 .valinnat { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem; }
 .valinnat label { position: relative; cursor: pointer; }
@@ -35,11 +35,10 @@ legend { margin-bottom: .6rem; padding: 0; }
 }
 .valinnat input:checked + span { border-color: #32674f; background: #dcebdd; box-shadow: inset 0 0 0 1px #32674f; }
 .valinnat small { display: block; }
-.ika { margin: 1.5rem 0; }
-.ika label { display: block; margin-bottom: .4rem; }
+.ika, .kesto { margin: 1.5rem 0; }
+.ika label, .kesto label { display: block; margin-bottom: .4rem; }
 .ika small { font-weight: 400; }
-.ika input {
-  width: min(100%, 10rem);
+.ika input, .kesto select {
   min-height: 3.5rem;
   padding: .5rem .8rem;
   border: 1px solid #799486;
@@ -48,6 +47,8 @@ legend { margin-bottom: .6rem; padding: 0; }
   font: inherit;
   font-size: 1.125rem;
 }
+.ika input { width: min(100%, 10rem); }
+.kesto select { width: min(100%, 17rem); background: #fff; }
 .ika p { margin: .4rem 0 0; font-size: .9rem; }
 .kortti {
   padding: clamp(1rem, 5vw, 1.8rem);

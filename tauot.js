@@ -1,39 +1,38 @@
-// Kunkin tauon ensimmäinen arvo on kesto sekunteina.
 const tauot = {
   lapset: {
     liike: [
-      [30, "Heiluta käsiäsi kuin puu tuulessa. Aloita pienestä tuulesta ja kokeile sitten isompaa puuskaa."],
-      [30, "Taputa kahdesti ja keksi pieni liike taputusten perään. Toista omaa sarjaasi."],
-      [45, "Liiku paikallasi kuin uninen karhu. Voit käyttää jalkoja tai pelkkiä käsiä."]
+      "Heiluta käsiäsi kuin puu tuulessa. Aloita pienestä tuulesta ja kokeile sitten isompaa puuskaa.",
+      "Taputa kahdesti ja keksi pieni liike taputusten perään. Toista omaa sarjaasi.",
+      "Liiku paikallasi kuin uninen karhu. Voit käyttää jalkoja tai pelkkiä käsiä."
     ],
     rauha: [
-      [30, "Etsi katseellasi kolme samanväristä asiaa. Katso kutakin hetki rauhassa."],
-      [30, "Kuuntele hetki ja yritä huomata yksi läheinen ja yksi kaukainen ääni."],
-      [45, "Piirrä sormella ilmaan kolme hidasta pilveä. Tee jokaisesta vähän erilainen."]
+      "Etsi katseellasi kolme samanväristä asiaa. Katso kutakin hetki rauhassa.",
+      "Kuuntele hetki ja yritä huomata yksi läheinen ja yksi kaukainen ääni.",
+      "Piirrä sormella ilmaan kolme hidasta pilveä. Tee jokaisesta vähän erilainen."
     ]
   },
   nuoret: {
     liike: [
-      [45, "Keksi kolmen liikkeen sarja lempibiisisi tahtiin. Toista se istuen tai seisten."],
-      [60, "Vaihda asentoa ja liiku hetki tilassa. Voit myös marssia paikallasi omassa tahdissasi."],
-      [45, "Rummuta käsilläsi kevyt rytmi polviin. Kokeile, miltä sama rytmi tuntuu hitaampana."]
+      "Keksi kolmen liikkeen sarja lempibiisisi tahtiin. Toista se istuen tai seisten.",
+      "Vaihda asentoa ja liiku hetki tilassa. Voit myös marssia paikallasi omassa tahdissasi.",
+      "Rummuta käsilläsi kevyt rytmi polviin. Kokeile, miltä sama rytmi tuntuu hitaampana."
     ],
     rauha: [
-      [60, "Laske puhelin hetkeksi. Valitse näkymä ikkunasta tai yksityiskohta huoneesta ja huomaa siitä kolme asiaa."],
-      [45, "Kuuntele ympäristön ääniä. Valitse yksi ja huomaa, muuttuuko se hetken aikana."],
-      [60, "Lepuuta käsiä sylissä. Huomaa hetken ajan, miltä tuolin tuki tai jalkojen alusta tuntuu."]
+      "Laske puhelin hetkeksi. Valitse näkymä ikkunasta tai yksityiskohta huoneesta ja huomaa siitä kolme asiaa.",
+      "Kuuntele ympäristön ääniä. Valitse yksi ja huomaa, muuttuuko se hetken aikana.",
+      "Lepuuta käsiä sylissä. Huomaa hetken ajan, miltä tuolin tuki tai jalkojen alusta tuntuu."
     ]
   },
   aikuiset: {
     liike: [
-      [60, "Vaihda työasentoa. Pyöräytä hartioita rauhallisesti muutaman kerran ja avaa ja sulje kädet kevyesti."],
-      [90, "Pidä lyhyt kierros työpisteen lähistöllä. Jos jäät istumaan, liikuttele nilkkoja ja käsiä omaan tahtiin."],
-      [60, "Laske kädet hetkeksi pois näppäimistöltä. Ravistele niitä kevyesti ja ojenna sormet muutaman kerran."]
+      "Vaihda työasentoa. Pyöräytä hartioita rauhallisesti muutaman kerran ja avaa ja sulje kädet kevyesti.",
+      "Pidä lyhyt kierros työpisteen lähistöllä. Jos jäät istumaan, liikuttele nilkkoja ja käsiä omaan tahtiin.",
+      "Laske kädet hetkeksi pois näppäimistöltä. Ravistele niitä kevyesti ja ojenna sormet muutaman kerran."
     ],
     rauha: [
-      [60, "Siirrä katse pois näytöstä ja katso hetki kauempana olevaa kohdetta. Anna katseen levätä siinä."],
-      [90, "Laske kädet syliin ja istu hetki rauhassa. Huomaa hengityksen tahti ja anna sen jatkua omalla rytmillään."],
-      [60, "Pysähdy kuuntelemaan ympäristön ääniä. Huomaa ensin lähin ääni ja sitten kaukaisin, jonka erotat."]
+      "Siirrä katse pois näytöstä ja katso hetki kauempana olevaa kohdetta. Anna katseen levätä siinä.",
+      "Laske kädet syliin ja istu hetki rauhassa. Huomaa hengityksen tahti ja anna sen jatkua omalla rytmillään.",
+      "Pysähdy kuuntelemaan ympäristön ääniä. Huomaa ensin lähin ääni ja sitten kaukaisin, jonka erotat."
     ]
   }
 };
@@ -93,7 +92,6 @@ lomake.addEventListener("submit", (tapahtuma) => {
 
   const vaihtoehdot = lista.length > 1 ? lista.filter((tauko) => tauko !== edellinen) : lista;
   edellinen = vaihtoehdot[Math.floor(Math.random() * vaihtoehdot.length)];
-  const [sekunnit, ohje] = edellinen;
   if (minuutit > 1) {
     const [alku, keski, loppu] = edellinen;
     const vaiheidenKestot = minuutit === 5 ? [1, 3, 1] : [5, 5, 5];
@@ -102,11 +100,9 @@ lomake.addEventListener("submit", (tapahtuma) => {
       return `${vaihe} (${kesto} ${kesto === 1 ? "minuutti" : "minuuttia"}).`;
     }).join(" ");
   } else {
-    tehtava.textContent = minuutit === 1
-      ? `${ohje} Jatka tai toista rauhassa, kunnes minuutti on kulunut.`
-      : ohje;
+    tehtava.textContent = `${edellinen} Jatka tai toista rauhassa, kunnes minuutti on kulunut.`;
   }
-  aika.textContent = minuutit ? `${minuutit} ${minuutit === 1 ? "minuutti" : "minuuttia"}` : `Noin ${sekunnit} sekuntia`;
+  aika.textContent = `${minuutit} ${minuutit === 1 ? "minuutti" : "minuuttia"}`;
   aika.hidden = false;
   nappi.textContent = "Arvo uusi tauko";
 });

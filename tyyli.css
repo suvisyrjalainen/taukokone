@@ -9,14 +9,6 @@ body { margin: 0; }
 main { width: min(100% - 2rem, 40rem); margin: auto; padding: 2.5rem 0; }
 header { margin-bottom: 2rem; }
 header p { max-width: 36ch; }
-.nimi {
-  display: inline-block;
-  margin: 0;
-  padding: .3rem .8rem;
-  border: 1px solid #95aa99;
-  border-radius: 2rem;
-  font-weight: 750;
-}
 h1 { margin: .65rem 0 0; font-size: clamp(2.75rem, 9vw, 5rem); line-height: 1; letter-spacing: -.06em; }
 h1 em { color: #32674f; font-style: normal; }
 fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
@@ -37,7 +29,6 @@ legend { margin-bottom: .6rem; padding: 0; }
 .valinnat small { display: block; }
 .ika, .kesto { margin: 1.5rem 0; }
 .ika label, .kesto label { display: block; margin-bottom: .4rem; }
-.ika small { font-weight: 400; }
 .ika input, .kesto select {
   min-height: 3.5rem;
   padding: .5rem .8rem;
@@ -49,7 +40,6 @@ legend { margin-bottom: .6rem; padding: 0; }
 }
 .ika input { width: min(100%, 10rem); }
 .kesto select { width: min(100%, 17rem); background: #fff; }
-.ika p { margin: .4rem 0 0; font-size: .9rem; }
 .kortti {
   padding: clamp(1rem, 5vw, 1.8rem);
   border: 1px solid #c3d4c6;

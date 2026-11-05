@@ -144,20 +144,29 @@ lomake.addEventListener("submit", (tapahtuma) => {
     ? Object.values(lahde).flatMap((tauotRyhmittain) => tauotRyhmittain[tavoite])
     : lahde[ryhma][tavoite];
   const omatTauot = tekemisenTauot[tekeminen.value]?.[tavoite];
-  const lista = omatTauot ?? yleisetTauot;
+  const uudetTauot = omatTauot
+    ? lisatauot[tekeminen.value][tavoite]
+    : Number.isNaN(vuodet)
+      ? Object.keys(tauot).flatMap((ikaRyhma) => lisatauot[ikaRyhma][tavoite])
+      : lisatauot[ryhma][tavoite];
+  const lista = [...(omatTauot ?? yleisetTauot), ...uudetTauot];
 
   const vaihtoehdot = lista.length > 1 ? lista.filter((tauko) => tauko !== edellinen) : lista;
   edellinen = vaihtoehdot[Math.floor(Math.random() * vaihtoehdot.length)];
   if (minuutit > 1) {
-    const [alku, keski, loppu] = edellinen;
+    const vaiheet = Array.isArray(edellinen) ? edellinen : [
+      tavoite === "liike" ? "Vaihda asentoa ja aloita liike rauhallisesti" : "Asetu mukavasti ja siirrä huomio pois siitä, mitä olit tekemässä",
+      edellinen,
+      tavoite === "liike" ? "Hidasta liikettä vähitellen ja lepää hetki" : "Anna katseen tai käsien levätä vielä hetki"
+    ];
     const vaiheidenKestot = minuutit === 5 ? [1, 3, 1] : [5, 5, 5];
-    tehtava.textContent = [alku, keski, loppu].map((vaihe, i) => {
+    tehtava.textContent = vaiheet.map((vaihe, i) => {
       const kesto = vaiheidenKestot[i];
       return `${vaihe} (${kesto} ${kesto === 1 ? "minuutti" : "minuuttia"}).`;
     }).join(" ");
   } else {
-    const ohje = omatTauot ? `${edellinen[1]}.` : edellinen;
-    tehtava.textContent = `${ohje} Jatka tai toista rauhassa, kunnes minuutti on kulunut.`;
+    const ohje = Array.isArray(edellinen) ? edellinen[1] : edellinen.replace(/\.$/, "");
+    tehtava.textContent = `${ohje}. Jatka tai toista rauhassa, kunnes minuutti on kulunut.`;
   }
   aika.textContent = `${minuutit} ${minuutit === 1 ? "minuutti" : "minuuttia"}`;
   aika.hidden = false;

@@ -14,7 +14,9 @@ body { margin: 0; }
 main { width: min(100% - 2rem, 40rem); margin: auto; padding: 2.5rem 0; }
 header { margin-bottom: 2rem; }
 header p { max-width: 36ch; }
-h1 { margin: .65rem 0 0; font-size: clamp(2.75rem, 9vw, 5rem); line-height: 1; letter-spacing: -.06em; }
+.otsikkorivi { display: flex; align-items: center; gap: clamp(.65rem, 3vw, 1.25rem); }
+.otsikkorivi img { flex: none; width: clamp(3.5rem, 16vw, 6rem); height: auto; }
+h1 { margin: 0; font-size: clamp(2.25rem, 8vw, 5rem); line-height: 1; letter-spacing: -.06em; }
 h1 em { color: var(--turkoosi); font-style: normal; }
 fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
 legend, .ika label, .kesto label { font-weight: 750; }

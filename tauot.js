@@ -170,11 +170,13 @@ lomake.addEventListener("submit", (tapahtuma) => {
   }
   aika.textContent = `${minuutit} ${minuutit === 1 ? "minuutti" : "minuuttia"}`;
   aika.hidden = false;
+  tehtava.hidden = false;
   nappi.textContent = "Arvo uusi tauko";
 });
 
 lomake.addEventListener("change", () => {
   aika.hidden = true;
-  tehtava.textContent = "Arvo itsellesi pieni tauko.";
+  tehtava.hidden = true;
+  tehtava.textContent = "";
   nappi.textContent = "Arvo tauko";
 });

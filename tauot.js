@@ -71,9 +71,63 @@ const pitkienTaukojenVaiheet = {
   }
 };
 
+const tekemisenTauot = {
+  tietokone: {
+    liike: [
+      ["Irrota kädet näppäimistöltä ja pyöräytä hartioita","Kävele hetki pois näytön äärestä tai askella paikallasi","Palaa työpisteelle ja liikuttele sormia kevyesti"],
+      ["Vaihda asentoa ja ravistele käsiä","Vuorottele rauhallisia askelia ja käsien heilautuksia","Hidasta ja anna käsien levätä"]
+    ],
+    rauha: [
+      ["Sammuta näyttö tai käänny siitä poispäin","Anna katseen levätä kaukana olevassa kohteessa","Huomaa, miltä tauko näytöstä tuntuu"],
+      ["Laita ilmoitukset hetkeksi äänettömälle","Katsele ikkunasta tai huoneen kauimmaiseen nurkkaan","Pidä vielä hetki kädet sylissä"]
+    ]
+  },
+  fyysinen: {
+    liike: [
+      ["Laske työvälineet ja vaihda asentoa","Liikuttele nilkkoja ja ranteita kevyesti istuen","Anna käsien levätä"],
+      ["Pysähdy ja anna hartioiden laskeutua","Ota muutama rauhallinen askel tai liikuttele jalkoja istuen","Palaa mukavaan lepoasentoon"]
+    ],
+    rauha: [
+      ["Etsi rauhallinen paikka istahtaa","Anna käsien ja jalkojen levätä tuettuina","Kuuntele hetki, mitä ympärillä kuuluu"],
+      ["Laske työvälineet sivuun","Istu mukavasti ja katsele ympäristöä rauhassa","Nouse omaan tahtiisi, kun olet valmis"]
+    ]
+  },
+  istuma: {
+    liike: [
+      ["Ojenna jalkoja vuorotellen tai nouse ylös","Kävele, rullaa tai askella paikallasi omaan tahtiin","Hidasta ja valitse uusi mukava asento"],
+      ["Siirrä painoa rauhallisesti puolelta toiselle","Tee pieni kierros tilassa tai vuorottele kantapään ja varpaiden nostoja","Liikuttele hartioita kevyesti"]
+    ],
+    rauha: [
+      ["Vaihda istuma-asentoa tai nouse hetkeksi","Anna katseen levätä ja huomaa, miltä uusi asento tuntuu","Asetu mukavasti ennen kuin jatkat"],
+      ["Siirry halutessasi toiseen tuoliin tai paikkaan","Anna jalkojen levätä alustalla ja kuuntele ympäristöä","Palaa tehtävääsi rauhassa"]
+    ]
+  },
+  koti: {
+    liike: [
+      ["Jätä kotityö hetkeksi kesken","Liiku hetki lempikappaleen tahtiin istuen tai seisten","Hidasta liike kappaleen loppua kohti"],
+      ["Laske siivousvälineet sivuun","Kulje rauhallisesti huoneesta toiseen tai liikuttele käsiä istuen","Pysähdy mukavaan asentoon"]
+    ],
+    rauha: [
+      ["Laske askare käsistäsi ja istu alas","Valitse ympäriltäsi mukava yksityiskohta ja katsele sitä rauhassa","Mieti vasta lopuksi, mihin askareeseen palaat"],
+      ["Siirry pois keskeneräisen askareen luota","Kuuntele rauhassa, millaisia ääniä kodissa kuuluu","Vietä loppuhetki mukavassa asennossa"]
+    ]
+  },
+  koulu: {
+    liike: [
+      ["Sulje kirja ja laske kynä","Keksi kolmen liikkeen sarja ja toista sitä omaan tahtiisi","Hidasta ja ravistele käsiä kevyesti"],
+      ["Vaihda asentoa ja ojenna kädet mukavasti eteen","Kävele tai liikuta käsiä hiljaa oman rytmisi mukaan","Palaa opiskelupaikalle rauhassa"]
+    ],
+    rauha: [
+      ["Käännä vihko kiinni ja laita näyttö sivuun","Etsi katseellasi kolme samanväristä asiaa ja katsele niitä rauhassa","Kuuntele hetki ennen kuin jatkat opiskelua"],
+      ["Merkitse kohta, johon jäit","Piirrä paperille tai sormella ilmaan rauhallisesti toistuvaa kuviota","Lepuuta käsiä ja palaa sitten merkitsemääsi kohtaan"]
+    ]
+  }
+};
+
 const lomake = document.querySelector("#taukokone");
 const ika = document.querySelector("#ika");
 const kesto = document.querySelector("#kesto");
+const tekeminen = document.querySelector("#tekeminen");
 const aika = document.querySelector("#aika");
 const tehtava = document.querySelector("#tehtava");
 const nappi = lomake.querySelector("button");
@@ -86,9 +140,11 @@ lomake.addEventListener("submit", (tapahtuma) => {
   const minuutit = Number(kesto.value);
   const ryhma = vuodet < 13 ? "lapset" : vuodet < 18 ? "nuoret" : "aikuiset";
   const lahde = minuutit > 1 ? pitkienTaukojenVaiheet : tauot;
-  const lista = Number.isNaN(vuodet)
+  const yleisetTauot = Number.isNaN(vuodet)
     ? Object.values(lahde).flatMap((tauotRyhmittain) => tauotRyhmittain[tavoite])
     : lahde[ryhma][tavoite];
+  const omatTauot = tekemisenTauot[tekeminen.value]?.[tavoite];
+  const lista = omatTauot ?? yleisetTauot;
 
   const vaihtoehdot = lista.length > 1 ? lista.filter((tauko) => tauko !== edellinen) : lista;
   edellinen = vaihtoehdot[Math.floor(Math.random() * vaihtoehdot.length)];
@@ -100,7 +156,8 @@ lomake.addEventListener("submit", (tapahtuma) => {
       return `${vaihe} (${kesto} ${kesto === 1 ? "minuutti" : "minuuttia"}).`;
     }).join(" ");
   } else {
-    tehtava.textContent = `${edellinen} Jatka tai toista rauhassa, kunnes minuutti on kulunut.`;
+    const ohje = omatTauot ? `${edellinen[1]}.` : edellinen;
+    tehtava.textContent = `${ohje} Jatka tai toista rauhassa, kunnes minuutti on kulunut.`;
   }
   aika.textContent = `${minuutit} ${minuutit === 1 ? "minuutti" : "minuuttia"}`;
   aika.hidden = false;
